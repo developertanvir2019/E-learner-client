@@ -1,6 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
+import Blog from "../component/Blog/Blog";
+import Faq from "../component/Faq/Faq";
 import Home from "../component/Home/Home";
 import Main from "../component/Layout/Main";
+import Login from "../component/Login/Login";
+import Register from "../component/Register'/Register";
+import SingleCourse from "../component/SingleCourses/SingleCourse";
 
 export const routes = createBrowserRouter([
     {
@@ -12,14 +17,9 @@ export const routes = createBrowserRouter([
                 element: <Home></Home>
             },
             {
-                path: '/category/:id',
-                element: <Categories></Categories>,
-                loader: ({ params }) => fetch(`https://serverite-developertanvir2019.vercel.app/category/${params.id}`)
-            },
-            {
-                path: '/news/:id',
-                element: <PrivateRoute><News></News></PrivateRoute>,
-                loader: ({ params }) => fetch(`https://serverite-developertanvir2019.vercel.app/news/${params.id}`)
+                path: '/courses/:id',
+                element: <SingleCourse></SingleCourse>,
+                loader: ({ params }) => fetch(`https://assignment-server-10-developertanvir2019.vercel.app/courses/${params.id}`)
             },
             {
                 path: '/login',
@@ -30,12 +30,12 @@ export const routes = createBrowserRouter([
                 element: <Register></Register>
             },
             {
-                path: '/term',
-                element: <TermsAndCondition></TermsAndCondition>
+                path: '/blog',
+                element: <Blog></Blog>
             },
             {
-                path: '/profile',
-                element: <PrivateRoute><Profile></Profile></PrivateRoute>
+                path: '/faq',
+                element: <Faq></Faq>
             },
         ]
     }
