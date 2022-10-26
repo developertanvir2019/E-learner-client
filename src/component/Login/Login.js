@@ -19,7 +19,7 @@ const Login = () => {
                 const userin = result.user;
                 console.log(userin)
             })
-            .catch(err => console.error(err))
+            .catch(err => setError(err))
     }
     const handleSubmit = e => {
         e.preventDefault();

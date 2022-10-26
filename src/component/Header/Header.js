@@ -6,7 +6,10 @@ import { AuthContext } from '../../Others/AuthProvider';
 
 const Header = () => {
     const [toggle, setToggle] = useState(true);
-    const { user } = useContext(AuthContext);
+    const { user, logOut } = useContext(AuthContext);
+    const handleLogOut = () => {
+        logOut();
+    }
     return (
         <Navbar className='my-nav' bg="dark" expand="lg">
             <Container fluid>
@@ -24,6 +27,7 @@ const Header = () => {
 
                         <Link to={'faq'}> FAQ </Link>
                         <Link to={"blog"}> Blog </Link>
+                        <Link onClick={handleLogOut()} > Logout </Link>
                         <Button onClick={() => setToggle(!toggle)} className={toggle ? 'bg-light text-dark' : 'bg-dark text-white'} >
                             {toggle ? "light" : "dark"}
                         </Button>
