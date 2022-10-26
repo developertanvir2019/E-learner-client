@@ -1,55 +1,43 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Button, Container, Image, Nav, Navbar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { FaUserAlt } from 'react-icons/fa';
+import './Header.css'
 import { AuthContext } from '../../Others/AuthProvider';
 
 const Header = () => {
-    const { user, logOut } = useContext(AuthContext);
-    const handleLogOut = () => {
-        logOut()
-            .then(() => { })
-            .catch(err => console.log(err))
-    }
+    const [toggle, setToggle] = useState(true);
+    const { user } = useContext(AuthContext);
     return (
-        <Navbar bg="light" expand="lg">
+        <Navbar className='my-nav' bg="dark" expand="lg">
             <Container fluid>
-                <Navbar.Brand><Link to='/'>E-Learner</Link></Navbar.Brand>
+                <Navbar.Brand><Link to='/'><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-I-51LGfxKAAqiwAFPGOpPgbEhm04kYzQRwjHirmijw&s" alt="" /></Link></Navbar.Brand>
+                <Navbar.Brand> <h4 className='text-white'>E-Learner</h4></Navbar.Brand>
                 <Navbar.Toggle aria-controls="navbarScroll" />
                 <Navbar.Collapse id="navbarScroll">
                     <Nav
-                        className="ms-auto pe-5 my-2 my-lg-0"
-                        style={{ maxHeight: '100px' }}
+                        className="ms-auto pe-5"
+                        style={{ maxHeight: '80px' }}
                         navbarScroll
                     >
-                        <Nav.Link href="#action1">Home</Nav.Link>
-                        <Nav.Link className='px-4' href="#action2">Link</Nav.Link>
+                        <Link to={'/'}>Home</Link>
+                        <Link to={'/courses'}>Courses</Link>
 
-                        <Nav.Link href="#"> Link </Nav.Link>
-                        <Nav.Link href="#">
-                            {
-                                user?.uid ?
-                                    <>
-                                        <span>{user?.displayName}</span>
-                                        <Button onClick={handleLogOut} className='ms-2' variant="outline-success">Log Out</Button>
-                                    </>
-                                    :
-                                    <>
-                                        <Button variant="outline-warning"><Link to={'/login'}>Log IN</Link></Button>
-                                        <Button variant="outline-warning"><Link to={'/register'}>Register</Link></Button>
+                        <Link to={'faq'}> FAQ </Link>
+                        <Link to={"blog"}> Blog </Link>
+                        <Button onClick={() => setToggle(!toggle)} className={toggle ? 'bg-light text-dark' : 'bg-dark text-white'} >
+                            {toggle ? "light" : "dark"}
+                        </Button>
 
-
-                                    </>
-                            }
-                        </Nav.Link>
-                        <Link to={'/profile'}>
-                            {
-                                user ?
+                        {
+                            user?.uid ?
+                                <>
                                     <Image src={user?.photoURL} className='profileimg'></Image>
-                                    :
-                                    <FaUserAlt></FaUserAlt>
-                            }
-                        </Link>
+                                </>
+                                :
+                                <>
+                                    <Button variant="outline-primary"><Link to={'/login'}>Login</Link></Button>
+                                </>
+                        }
                     </Nav>
                 </Navbar.Collapse>
             </Container>
