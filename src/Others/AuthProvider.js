@@ -1,12 +1,12 @@
 import React, { createContext, useEffect, useState } from 'react';
-import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, sendEmailVerification, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
-import app from './firebase.cofig';
+import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, sendEmailVerification, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth'
+import app from '../Others/firebase.cofig';
 export const AuthContext = createContext()
 const auth = getAuth(app)
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
-    const providerLogIn = (provider) => {        //google log in
+    const providerLogIn = (provider) => {
         return signInWithPopup(auth, provider)
     }
     const emailVerify = () => {
@@ -35,7 +35,7 @@ const AuthProvider = ({ children }) => {
             setLoading(false);
         });
         return () => unsubscribe;
-    }, [user])
+    }, [])
     const authInfo = { providerLogIn, user, logOut, createUser, signIn, loading, updateUserProfile, emailVerify }
     return (
         <div>

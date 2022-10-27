@@ -1,50 +1,79 @@
 import React, { useContext, useState } from 'react';
-import { Button, Form } from 'react-bootstrap';
-import { Link, Navigate, useLocation } from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import { Link } from 'react-router-dom';
 import { AuthContext } from '../../Others/AuthProvider';
-
 const Register = () => {
-    const location = useLocation();
-    const [error, setError] = useState('')
-    const from = location.state?.from?.pathname || '/';
-    const { createUser } = useContext(AuthContext)
+    const [error, setError] = useState('');
+    const [accept, setAccept] = useState(false);
+    const { createUser, updateUserProfile, emailVerify } = useContext(AuthContext)
+    const handleAccept = e => {
+        setAccept(!accept)
+    }
     const handleSubmit = e => {
-        e.preventDefault();
+        setError('')
+        e.preventDefault()
         const form = e.target;
+        const name = form.name.value;
         const email = form.email.value;
         const password = form.password.value;
+        const photoURL = form.photoURL.value;
         createUser(email, password)
-            .then(result => {
-                const user = result.user;
+            .then(res => {
+                const user = res.user;
                 console.log(user)
-                Navigate(from, { replace: true })
-                form.reset();
-                setError('')
+                form.reset()
+                handleUpdate(name, photoURL);
+                handleVerify();
+                alert('verify mail sent')
             })
-            .catch(error => setError(error.message))
+            .catch(err => {
+                setError(err.message)
+            })
+
+    }
+    const handleVerify = () => {
+        emailVerify()
+            .then(() => { })
+            .catch(err => console.log(err))
+    };
+    const handleUpdate = (name, photoURL) => {
+        const profile = {
+            displayName: name,
+            photoURL: photoURL
+        }
+        updateUserProfile(profile)
+            .then(() => { })
+            .catch(() => { })
     }
     return (
-        <div>
-            <Form onSubmit={handleSubmit} className='w-50 mx-auto mt-5'>
-                <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Control name="name" type="text" placeholder="Enter name" />
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Control name="email" type="email" placeholder="Enter email" />
-                </Form.Group>
-
-                <Form.Group className="mb-3" controlId="formBasicPassword">
-                    <Form.Control name="password" type="password" placeholder="Password" />
-                </Form.Group>
-
-                <p>{error}</p>
-                <Button variant="primary" type="submit">
-                    Register
-                </Button>
-                <button className='btn btn-outline-primary mx-3'>Google</button>
-                <Link to={'/login'}>already have an account</Link>
-            </Form>
-        </div>
+        <Form onSubmit={handleSubmit}>
+            <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form.Label>Name</Form.Label>
+                <Form.Control name='name' type="text" placeholder="Enter Your name" />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form.Label>Email address</Form.Label>
+                <Form.Control name='email' type="email" placeholder="Enter email" />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formBasicPassword">
+                <Form.Label>Password</Form.Label>
+                <Form.Control name='password' type="password" placeholder="Password" />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formBasicPassword">
+                <Form.Label>photo url</Form.Label>
+                <Form.Control name='photoURL' type="text" placeholder="photo Url" />
+            </Form.Group>
+            <h6 className='text-danger'>{error}</h6>
+            <Form.Group className="mb-3" controlId="formBasicCheckbox">
+                <Form.Check type="checkbox" onClick={handleAccept}
+                    label={<>Accept <Link to='/term'> terms and conditions</Link></>}
+                />
+            </Form.Group>
+            <Button variant="primary" type="submit" disabled={!accept}>
+                Register
+            </Button>
+        </Form>
     );
 };
 

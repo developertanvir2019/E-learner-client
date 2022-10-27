@@ -1,8 +1,8 @@
 import React, { useContext, useState } from 'react';
 import { Button, Container, Image, Nav, Navbar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import './Header.css'
 import { AuthContext } from '../../Others/AuthProvider';
+import './Header.css'
 
 const Header = () => {
     const [toggle, setToggle] = useState(true);

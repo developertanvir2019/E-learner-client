@@ -3,7 +3,7 @@ import './Footer.css'
 
 const Footer = () => {
     return (
-        <div className='d-flex justify-content-center align-items-center footer'>
+        <div className='d-flex justify-content-center align-items-center footer mt-5'>
             <div>
                 <h6> Ⓒ All rights reserved by || Tanvir</h6>
                 <h5>If you need to contact with us</h5>

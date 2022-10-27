@@ -3,13 +3,20 @@ import Blog from "../component/Blog/Blog";
 import Course from "../component/Courses/Course";
 import CourseDetails from "../component/Courses/CourseDetails";
 import Courses from "../component/Courses/Courses";
+import Premium from "../component/Courses/Premium";
+import Error from "../component/Error/Error";
 import Faq from "../component/Faq/Faq";
 import Home from "../component/Home/Home";
 import Main from "../component/Layout/Main";
 import Login from "../component/Login/Login";
 import Register from "../component/Register'/Register";
+import PrivateRoute from "./PrivateRouter";
 
 export const routes = createBrowserRouter([
+    {
+        path: '*',
+        element: <Error></Error>
+    },
     {
         path: '/',
         element: <Main></Main>,
@@ -51,6 +58,10 @@ export const routes = createBrowserRouter([
                 path: '/faq',
                 element: <Faq></Faq>
             },
+            {
+                path: '/premium',
+                element: <PrivateRoute> <Premium></Premium></PrivateRoute>
+            }
         ]
     }
 ])
