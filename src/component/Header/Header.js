@@ -11,7 +11,7 @@ const Header = () => {
         logOut();
     }
     return (
-        <Navbar className='my-nav' bg="dark" expand="lg">
+        <Navbar className='my-nav' expand="lg">
             <Container fluid>
                 <Navbar.Brand><Link to='/'><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-I-51LGfxKAAqiwAFPGOpPgbEhm04kYzQRwjHirmijw&s" alt="" /></Link></Navbar.Brand>
                 <Navbar.Brand> <h4 className='text-white'>E-Learner</h4></Navbar.Brand>

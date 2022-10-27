@@ -4,6 +4,10 @@
 
 .my-nav {
     padding: 0;
+    background-color: #061860;
+    position: sticky !important;
+    top: 0;
+    z-index: 5;
 }
 
 .my-nav a {
