@@ -1,0 +1,8 @@
+.details a {
+    text-decoration: none;
+}
+
+.details {
+    position: sticky;
+    top: 0;
+}

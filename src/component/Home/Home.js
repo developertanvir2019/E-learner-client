@@ -7,7 +7,8 @@ const Home = () => {
         <div>
             <div className='d-flex justify-content-center align-items-center banner'>
                 <div>
-                    <h1>Welcome our learning zone</h1>
+                    <h1>Hi Developer</h1>
+                    <h1>Welcome to our learning zone</h1>
                     <h5>This is our learning website.. <br /> We provide some course. You can learn web development <br />from our course </h5>
 
                 </div>

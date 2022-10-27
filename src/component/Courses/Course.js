@@ -10,17 +10,16 @@ const Course = () => {
             <h1 className='text-success my-4'>Our All Courses</h1>
             {
                 allCourse.map(course =>
-                    <Col className='mb-3' lg='4' sm='1'>
+                    <Col key={course.category_id} className='mb-3' lg='4' sm='1'>
 
                         <Card className='card-all' style={{ width: '18rem' }}>
                             <Card.Img variant="top" src={course.thumbnail_url} />
                             <Card.Body>
                                 <Card.Title>Course name : {course.title}</Card.Title>
                                 <Card.Text>
-                                    Some quick example text to build on the card title and make up the
-                                    bulk of the card's content.
+                                    {(course.details.slice(0, 50))}...
                                 </Card.Text>
-                                <Button variant="primary">Go somewhere</Button>
+                                <Button variant="primary">course details</Button>
                             </Card.Body>
                         </Card>
 

@@ -1,17 +1,17 @@
 import React from 'react';
-import { Col, Container, Row } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 import { Outlet, useLoaderData } from 'react-router-dom';
 import SideNav from './SideNav';
+import './Course.css'
 
 const Courses = () => {
-    const courses = useLoaderData()
-    console.log(courses)
+    const allUser = useLoaderData();
     return (
-        <Row className='mt-5'>
-            <Col lg='3'>
-                <SideNav></SideNav>
+        <Row>
+            <Col className='colum-color pt-5' lg='3'>
+                <SideNav data={allUser}></SideNav>
             </Col>
-            <Col lg='9'>
+            <Col className='pt-5' lg='9'>
                 <Outlet></Outlet>
             </Col>
 

@@ -1,13 +1,13 @@
 import { createBrowserRouter } from "react-router-dom";
 import Blog from "../component/Blog/Blog";
 import Course from "../component/Courses/Course";
+import CourseDetails from "../component/Courses/CourseDetails";
 import Courses from "../component/Courses/Courses";
 import Faq from "../component/Faq/Faq";
 import Home from "../component/Home/Home";
 import Main from "../component/Layout/Main";
 import Login from "../component/Login/Login";
 import Register from "../component/Register'/Register";
-import SingleCourse from "../component/SingleCourses/SingleCourse";
 
 export const routes = createBrowserRouter([
     {
@@ -19,19 +19,20 @@ export const routes = createBrowserRouter([
                 element: <Home></Home>
             },
             {
-                path: '/courses/:id',
-                element: <SingleCourse></SingleCourse>,
-                loader: ({ params }) => fetch(`https://assignment-server-10-developertanvir2019.vercel.app/courses/${params.id}`)
-            },
-            {
                 path: '/courses',
                 element: <Courses></Courses>,
+                loader: () => fetch(`https://assignment-server-10-developertanvir2019.vercel.app/courses`),
                 children: [
                     {
                         path: '/courses',
                         element: <Course></Course>,
-                        loader: () => fetch(`https://assignment-server-10-developertanvir2019.vercel.app/courses`)
-                    }
+                        loader: () => fetch(`https://assignment-server-10-developertanvir2019.vercel.app/courses`),
+                    },
+                    {
+                        path: '/courses/:id',
+                        element: <CourseDetails></CourseDetails>,
+                        loader: ({ params }) => fetch(`https://assignment-server-10-developertanvir2019.vercel.app/courses/${params.id}`)
+                    },
                 ]
             },
             {
