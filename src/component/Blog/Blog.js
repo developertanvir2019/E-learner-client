@@ -25,7 +25,7 @@ const Blog = () => {
                     </Accordion.Body>
                 </Accordion.Item>
                 <Accordion.Item eventKey="3">
-                    <Accordion.Header>3. What is Node? How does Node work?</Accordion.Header>
+                    <Accordion.Header>4. What is Node? How does Node work?</Accordion.Header>
                     <Accordion.Body>
                         It is a used as backend service where javascript works on the server-side of the application. This way javascript is used on both frontend and backend. Node. js runs on chrome v8 engine which converts javascript code into machine code, it is highly scalable, lightweight, fast, and data-intensive.
                     </Accordion.Body>
