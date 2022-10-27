@@ -10,7 +10,7 @@ import Home from "../component/Home/Home";
 import Main from "../component/Layout/Main";
 import Login from "../component/Login/Login";
 import Register from "../component/Register'/Register";
-import PrivateRoute from "./PrivateRouter";
+import PrivateRouter from "./PrivateRouter";
 
 export const routes = createBrowserRouter([
     {
@@ -59,8 +59,9 @@ export const routes = createBrowserRouter([
                 element: <Faq></Faq>
             },
             {
-                path: '/premium',
-                element: <PrivateRoute> <Premium></Premium></PrivateRoute>
+                path: '/premium/:id',
+                element: <Premium></Premium>,
+                loader: ({ params }) => fetch(`https://assignment-server-10-developertanvir2019.vercel.app/courses/${params.id}`)
             }
         ]
     }

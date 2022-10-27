@@ -33,7 +33,7 @@ const Header = () => {
                         </Button>
 
                         {
-                            user?.uid ?
+                            user ?
                                 <>
                                     <Image src={user?.photoURL} className='profileimg'></Image>
                                 </>

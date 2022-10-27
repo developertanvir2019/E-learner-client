@@ -1,7 +1,7 @@
 import React from 'react';
 import './Course.css'
 import { Button, Card, Col, Row } from 'react-bootstrap';
-import { useLoaderData } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 
 const Course = () => {
     const allCourse = useLoaderData()
@@ -19,7 +19,7 @@ const Course = () => {
                                 <Card.Text>
                                     {(course.details.slice(0, 50))}...
                                 </Card.Text>
-                                <Button variant="primary">course details</Button>
+                                <Link to={`/courses/${course.category_id}`}><Button variant="primary">course details</Button></Link>
                             </Card.Body>
                         </Card>
 
