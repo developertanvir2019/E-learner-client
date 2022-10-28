@@ -1,9 +1,43 @@
+
+
+
+
 live site link is : https://melodious-souffle-e0c6bd.netlify.app/
-# this is development site.
-# i used bootstrap for design
-# There are 6 course
-# I use navigate but it is not work
-# live site is host on netlify..
+# this is about web development site.
+# I used bootstrap for design ..
+# There are 6 course added in this site..
+# I use react router, firebase etc for this website...
+# This website have so many functional activities ...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 

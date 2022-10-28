@@ -6,11 +6,13 @@ import './Header.css'
 
 const Header = () => {
     const [toggle, setToggle] = useState(true);
-    const { user, logOut } = useContext(AuthContext);
+    const { user, logOut, setUser } = useContext(AuthContext);
     console.log(user)
     const handleLogOut = () => {
         logOut()
-            .then(() => { })
+            .then(() => {
+                setUser('')
+            })
             .catch(err => console.log(err));
     }
     return (
@@ -37,7 +39,7 @@ const Header = () => {
                             user ?
                                 <>
                                     <Link onClick={handleLogOut} > Logout </Link>
-                                    <Image src={user?.photoURL ? user.photoURL : `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBgZbchuTiUtA3Egi1arN4BEQeoTaUtutQ8A&usqp=CAU`} className='profileimg'></Image>
+                                    <Image title={user?.displayName ? user.displayName : 'User Name'} src={user?.photoURL ? user.photoURL : `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBgZbchuTiUtA3Egi1arN4BEQeoTaUtutQ8A&usqp=CAU`} className='profileimg'></Image>
                                 </>
                                 :
                                 <>

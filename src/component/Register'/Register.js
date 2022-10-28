@@ -1,11 +1,9 @@
 import React, { useContext, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { Link, Navigate, useLocation } from 'react-router-dom';
+import { Link, } from 'react-router-dom';
 import { AuthContext } from '../../Others/AuthProvider';
 const Register = () => {
-    // const location = useLocation()
-    // const from = location.state?.from?.pathname || '/';
     const { createUser } = useContext(AuthContext)
     const [error, setError] = useState(null);
     const handleSubmit = e => {
@@ -17,11 +15,11 @@ const Register = () => {
             .then(result => {
                 const user = result.user;
                 console.log(user)
-                // Navigate(from, { replace: true })
                 form.reset();
+                setError('')
             })
             .catch(err => {
-                console.error(err)
+                setError(err.message)
             })
     }
     return (
@@ -39,6 +37,7 @@ const Register = () => {
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Control name="password" type="password" placeholder="Password" />
                 </Form.Group>
+                <p className='text-danger'>{error}</p>
                 <Button className='me-3' variant="primary" type="submit">
                     Register
                 </Button>

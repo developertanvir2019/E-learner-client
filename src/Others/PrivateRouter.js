@@ -7,7 +7,7 @@ const PrivateRouter = ({ children }) => {
     const { user, loading } = useContext(AuthContext);
     const location = useLocation();
     if (loading) {
-        <Spinner animation="border" variant="danger" />
+        return <Spinner animation="border" variant="danger" />
 
     }
     if (user && user.uid) {
