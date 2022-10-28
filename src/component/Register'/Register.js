@@ -1,12 +1,13 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { Link, Navigate, useLocation } from 'react-router-dom';
 import { AuthContext } from '../../Others/AuthProvider';
 const Register = () => {
-    const location = useLocation()
-    const from = location.state?.from?.pathname || '/';
+    // const location = useLocation()
+    // const from = location.state?.from?.pathname || '/';
     const { createUser } = useContext(AuthContext)
+    const [error, setError] = useState(null);
     const handleSubmit = e => {
         e.preventDefault();
         const form = e.target;
@@ -16,7 +17,8 @@ const Register = () => {
             .then(result => {
                 const user = result.user;
                 console.log(user)
-                Navigate(from, { replace: true })
+                // Navigate(from, { replace: true })
+                form.reset();
             })
             .catch(err => {
                 console.error(err)
@@ -24,6 +26,8 @@ const Register = () => {
     }
     return (
         <div>
+            <h1 className=' pt-4 text-primary'>Welcome to register page </h1>
+            <h2 className='text-primary'>keep register</h2>
             <Form onSubmit={handleSubmit} className='w-50 mx-auto mt-5'>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Control name="name" type="text" placeholder="Enter name" />
@@ -35,13 +39,9 @@ const Register = () => {
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Control name="password" type="password" placeholder="Password" />
                 </Form.Group>
-                <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                    <Form.Check type="checkbox" label="Check me out" />
-                </Form.Group>
-                <Button variant="primary" type="submit">
+                <Button className='me-3' variant="primary" type="submit">
                     Register
                 </Button>
-                <button className='btn btn-outline-primary mx-3'>Google</button>
                 <Link to={'/login'}>already have an account</Link>
             </Form>
         </div>

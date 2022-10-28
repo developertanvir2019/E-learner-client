@@ -1,43 +1,50 @@
 import React, { createContext, useEffect, useState } from 'react';
 import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth'
-import app from '../Others/firebase.config';
-export const AuthContext = createContext()
+import app from './firebase.config';
+export const AuthContext = createContext();
 const auth = getAuth(app)
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
 
-    const logOut = () => {
-        setLoading(true);
-        return signOut(auth);
-    }
     const createUser = (email, password) => {
         setLoading(true);
-        return createUserWithEmailAndPassword(auth, email, password)
+        return createUserWithEmailAndPassword(auth, email, password);
     };
     const signIn = (email, password) => {
         setLoading(true);
         return signInWithEmailAndPassword(auth, email, password)
     }
-    const updateUserProfile = (profile) => {
-        return updateProfile(auth.currentUser, profile)
+    const logOut = () => {
+        setLoading(true);
+        return signOut(auth);
     }
+    const googleSign = (provider) => {
+        return signInWithPopup(auth, provider)
+    }
+    const gitSign = (providerGit) => {
+        return signInWithPopup(auth, providerGit)
+    }
+    // const updateUserProfile = (profile) => {
+    //     return updateProfile(auth.currentUser, profile, user)
+    // }
     useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-            if (user === null || user.emailVerified) {
+        const unSubscribe = onAuthStateChanged(auth, currentUser => {
+            // if (user === null || user.emailVerified) {
+            if (currentUser) {
                 setUser(currentUser);
+                setLoading(false);
             }
-            setLoading(false);
+            // console.log('current user is the', currentUser);
+
         });
-        return () => unsubscribe;
+        return () => { unSubscribe() };
     }, [])
-    const authInfo = { user, logOut, createUser, signIn, loading, updateUserProfile }
+    const authInfo = { createUser, user, signIn, logOut, loading, googleSign, gitSign }
     return (
-        <div>
-            <AuthContext.Provider value={authInfo}>
-                {children}
-            </AuthContext.Provider>
-        </div>
+        <AuthContext.Provider value={authInfo}>
+            {children}
+        </AuthContext.Provider>
     );
 };
 

@@ -7,8 +7,11 @@ import './Header.css'
 const Header = () => {
     const [toggle, setToggle] = useState(true);
     const { user, logOut } = useContext(AuthContext);
+    console.log(user)
     const handleLogOut = () => {
-        logOut();
+        logOut()
+            .then(() => { })
+            .catch(err => console.log(err));
     }
     return (
         <Navbar className='my-nav' expand="lg">
@@ -27,15 +30,14 @@ const Header = () => {
 
                         <Link to={'faq'}> FAQ </Link>
                         <Link to={"blog"}> Blog </Link>
-                        <Link onClick={handleLogOut()} > Logout </Link>
                         <Button onClick={() => setToggle(!toggle)} className={toggle ? 'bg-light text-dark' : 'bg-dark text-white'} >
                             {toggle ? "light" : "dark"}
                         </Button>
-
                         {
                             user ?
                                 <>
-                                    <Image src={user?.photoURL} className='profileimg'></Image>
+                                    <Link onClick={handleLogOut} > Logout </Link>
+                                    <Image src={user?.photoURL ? user.photoURL : `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBgZbchuTiUtA3Egi1arN4BEQeoTaUtutQ8A&usqp=CAU`} className='profileimg'></Image>
                                 </>
                                 :
                                 <>

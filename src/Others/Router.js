@@ -60,7 +60,7 @@ export const routes = createBrowserRouter([
             },
             {
                 path: '/premium/:id',
-                element: <Premium></Premium>,
+                element: <PrivateRouter> <Premium></Premium></PrivateRouter>,
                 loader: ({ params }) => fetch(`https://assignment-server-10-developertanvir2019.vercel.app/courses/${params.id}`)
             }
         ]
